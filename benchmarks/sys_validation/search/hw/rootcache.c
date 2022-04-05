@@ -68,37 +68,35 @@ void search_stream(query_t * q, unsigned* res, cache_t* c){
 }
 
 void top() {
-	query_t* strIn = (query_t*)0x10020600;
+	query_t* strIn = (query_t*)cache_search_in;
 	unsigned * strOut = (unsigned *)cache_search_out;
 	unsigned* status = (unsigned *)0x100206f0;
 	void * a = (void *)0x80c10000;
 	unsigned * b = (unsigned *)0x80c10008;
 	query_t temp;
+	unsigned flag = 0;
 
 	// unsigned * d = (unsigned *)0x80c10010;
 	cache_t * c = (cache_t *)TESTA;
 	int i = 0;
-	while(1);
-	// while(1){
-		// if(*status != 0){
-			// temp = *strIn;
+	// while(1);
+	while(1){
+		if(*status != 0){
+			temp = *strIn;
+			if(flag != temp.start){
+				flag = temp.start;
+				*strOut = temp.start;
+			}
 			// search_stream(strIn, strOut, c);
-			// *strOut = temp.start;
+			
 			// return;
-		// }
+		}
+		else{
+			i++;
+		}
+
 		
-
-		// i++;
-	// }?
+	}
 	
-	// if(b[0] == 2){
-	// 	// c->occupancy = 0;
-	// 	insert(a,b,c);
-	// }
-	// else{
-
-	// 	search(a, b, c);
-	// }
-
 	return;
 }

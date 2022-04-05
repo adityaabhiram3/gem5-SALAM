@@ -228,10 +228,6 @@ int main(void) {
     TYPE *m1 = (TYPE *)base;
     TYPE *m2 = (TYPE *)(base + sizeof(TYPE) * N);
     TYPE *m3 = (TYPE *)(base + 2 * sizeof(TYPE) * N);
-
-    unsigned * f    = (unsigned *)0x80c10000;
-    unsigned * g    = (unsigned *)0x80c10008;
-    unsigned * m    = (unsigned *)0x80c10010;
     cache_t * h     = (cache_t *)TESTA;
 
     for(int i=1;i<=500;i++)
@@ -241,9 +237,9 @@ int main(void) {
     }
 
     *m3 = (uint64_t)r;
-    *arg1 = (uint64_t)(void *)m1;
-    *arg2 = (uint64_t)(void *)m2;
-    *arg3 = (uint64_t)(void *)m3;
+    *arg1 = (uint32_t)(void *)m1;
+    *arg2 = (uint32_t)(void *)m2;
+    *arg3 = (uint32_t)(void *)m3;
     int count;
 
     *top = 0x01;
@@ -252,9 +248,9 @@ int main(void) {
         count++;
     *root = 0;
     *top=0x0;
-    printf("Done\n");
+    // printf("Done output: %d\n", m2[0]);
 
-    for(int i=0;i<500;i++)
+    for(int i=0;i<500;i+=3)
     {
         printf("Job complete : %d %d %p\n",m1[i], m2[i], h->occupancy);
     }
